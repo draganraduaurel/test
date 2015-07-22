@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator focala</title>
+<meta charset="UTF-8">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="http://fotodex.ro/proiect/kit/bootstrap.min.css"> <!-- Bootstrap 3.3.5 Css  -->
+<link rel="stylesheet" href="style.css"> <!-- css aplicatiei -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- Ajax3.3.5 Css  -->
+<script src="http://fotodex.ro/proiect/kit/bootstrap.min.js"></script> <!-- Bootstrap 3.3.5 Javascript  -->
+
+</head>
+<style>
+#culoare {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.panel.panel-default {
+  /* margin-left: 50px; */
+  max-width: 20%;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+</style>
+
+
+<body>
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Culoarea zilelor tale</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li><a href="#">Numerologia mihaelei Mihaela</a></li>
+        
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+<form class="navbar-form navbar-left" action="#" method="post" >
+        <div class="form-group">
+          <input type="number" class="form-control" placeholder="zi" name="zi">
+          <input type="number" class="form-control" placeholder="luna" name="luna">
+          <input type="number" class="form-control" placeholder="an" name="an">
+        </div>
+        <button type="submit" class="btn btn-default">Trimite</button>
+      </form>
+
+
+
+
+
+
+
+
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<?php
+if (! empty($_POST['zi']) && ! empty($_POST['luna'])  && ! empty($_POST['an']) ){
+
+
+$ziN = $_POST['zi'] ;
+
+if (strlen($ziN) < 2) {
+
+$zi = '0' . $ziN;  
+
+} 
+elseif (strlen($ziN) > 2) {
+	$zi = substr($ziN, 0, 2);
+} else {
+	$zi = $ziN;  
+}
+
+
+$lunaN = $_POST['luna'] ;
+
+
+if (strlen($lunaN) < 2) {
+
+$luna = '0' . $lunaN;  
+
+} 
+elseif (strlen($lunaN) > 2) {
+	$luna = substr($lunaN, 0, 2);
+} else {
+	$luna = $lunaN;  
+}
+
+$anN = $_POST['an'] ;
+
+if (strlen($anN) === 2) {
+
+$an = '19' . $anN;  
+
+} else {
+	$an = $anN;  
+}
+
+
+
+
+$valoare = $zi . $luna . $an ;
+$hex = dechex($valoare);
+$SaseHex = substr($hex, 0, 6);
+
+$valoarezi = substr(dechex(date("dmY")), 0, 6);
+
+echo $valoare . '<br>';  
+echo $hex . '<br>';
+echo strlen($hex);
+
+
+
+if(strlen($SaseHex) == 3) {
+      $r = hexdec(substr($SaseHex,0,1).substr($SaseHex,0,1));
+      $g = hexdec(substr($SaseHex,1,1).substr($SaseHex,1,1));
+      $b = hexdec(substr($SaseHex,2,1).substr($SaseHex,2,1));
+   } else {
+      $r = hexdec(substr($SaseHex,0,2));
+      $g = hexdec(substr($SaseHex,2,2));
+      $b = hexdec(substr($SaseHex,4,2));
+   }
+   $rgb = array($r, $g, $b);
+
+echo '<div id="culoare" style="background-color:#' . $SaseHex . '"></div>' ;
+echo '<div class="panel panel-default"><div class="panel-body">Culoarea zilei '. $ziN .'/'. $lunaN .'/'. $an .' este <h1>#'. $SaseHex .'</h1>' . 'R:'. $r .' G:'. $g.' B:'. $b. '</div></div>';
+
+
+}
+?>
+
+
+
+</body>
+</html>
